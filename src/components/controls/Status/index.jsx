@@ -1,0 +1,1 @@
+export { default as StatusColBoolean} from "./StatusColBoolean"

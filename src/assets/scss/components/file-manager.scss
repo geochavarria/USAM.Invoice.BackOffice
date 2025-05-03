@@ -1,0 +1,231 @@
+//
+// _file-manager.scss
+//
+
+$prefix: "--vz";
+$font-weight-medium: 500;
+$success: green;
+$secondary: purple;
+$primary: blue;
+$danger: red;
+$warning: orange;
+$header-height: 0px;
+$footer-height: 0px;
+$box-shadow-lg: 0 5px 10px #1e20251f;
+
+.file-manager-menu {
+    max-height: calc(100vh - 296px);
+
+    @media (max-width: 991.98px) {
+        height: calc(100vh - 296px);
+    }
+
+    li {
+        padding: 2px 0px;
+        font-size: 15px;
+        a {
+            color: var(--#{$prefix}body-color);
+            font-weight: $font-weight-medium;
+            transition: all 0.5s ease;
+
+            &.active,
+            &:hover,
+            &[aria-expanded="true"]{
+                color: $success;
+            }
+        }
+
+        .sub-menu {
+
+            
+            li {
+                padding-left: 20px;
+                position: relative;
+
+                &::before {
+                    content: "\f2d1";
+                    position: absolute;
+                    left: 0px;
+                    font-size: 12px;
+                    font-family: "Font Awesome 5 Free";
+                    color: rgba(var(--#{$prefix}dark-rgb), 0.4);
+                    transform: translateY(-15%);
+                 
+                }
+            }
+        }
+    }
+
+    //Custom List Colors
+    &.list-secondary{
+        li{
+            a{
+                &.active,
+                &:hover,
+                &[aria-expanded="true"]{
+                    color: $secondary;
+                }
+            }
+        }
+    }
+
+    &.list-primary{
+        li{
+            a{
+                &.active,
+                &:hover,
+                &[aria-expanded="true"]{
+                    color: $primary;
+                }
+            }
+        }
+    }
+
+    &.list-danger{
+        li{
+            a{
+                &.active,
+                &:hover,
+                &[aria-expanded="true"]{
+                    color: $danger;
+                }
+            }
+        }
+    }
+
+    &.list-warning{
+        li{
+            a{
+                &.active,
+                &:hover,
+                &[aria-expanded="true"]{
+                    color: $warning;
+                }
+            }
+        }
+    }
+}
+
+.file-manager-sidebar {
+    position: relative;
+    background-color: var(--#{$prefix}secondary-bg);
+
+    
+    @media (min-width: 992px) {
+        min-width: 300px;
+        max-width: 300px;
+        height: calc(100vh - #{$header-height} - #{$footer-height} - 8px);
+        &.menubar-show {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 200px;
+        max-width: 100%;
+        z-index: 1003;
+        box-shadow: $box-shadow-lg;
+        transform: translateX(-100%);
+        visibility: hidden;
+        height: 100vh;
+
+        &.menubar-show {
+            visibility: visible;
+            transform: none;
+        }
+
+        .overlay{
+            position: fixed;
+            top: 0;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+        }
+    }
+}
+
+.file-menu-sidebar-scroll{
+    height: calc(100vh - 375px);
+    &.no-footer{
+        height: calc(100vh - 250px);
+    }
+    @media (max-width: 991.98px) {
+        height: calc(100vh - 190px);
+    }
+    
+}
+
+.file-manager-content {
+    background-color: var(--#{$prefix}secondary-bg);
+}
+
+.file-manager-content-scroll{
+    height: calc(100vh - 185px);
+    @media (max-width: 991.98px) {
+        height: calc(100vh - 144px);
+    }
+
+    .simplebar-content{
+        height: 100%;
+    }
+}
+
+.file-detail-content-scroll{
+    height: calc(100vh - 180px);
+    @media (max-width: 991.98px) {
+        height: 100vh;
+    }
+
+    .simplebar-content{
+        height: 100%;
+    }
+}
+
+.file-manager-detail-content {
+    width: 32%;
+    max-width: 100%;
+    background-color: var(--#{$prefix}secondary-bg);
+    display: none;
+}
+
+.file-detail-show{
+    .file-manager-detail-content{
+        display: block;
+    }
+}
+
+#file-overview{
+    display: none;
+}
+
+@media (max-width: 1399.98px) {
+    .file-manager-detail-content {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: auto;
+        right: 0;
+        width: 400px;
+        max-width: 100%;
+        z-index: 1003;
+        box-shadow: $box-shadow-lg;
+        transform: translateX(100%);
+    }
+
+    .file-detail-show {
+        .file-manager-detail-content {
+            transform: none;
+        }
+    }
+}
+
+.file-details-box {
+    height: 195px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
