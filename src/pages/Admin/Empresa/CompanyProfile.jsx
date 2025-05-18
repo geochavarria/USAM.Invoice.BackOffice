@@ -2,12 +2,13 @@ import FormProfile from "./FormProfile";
 import BrandsDataTable from "./BrandsDataTable";
 import { getEmpresaByCodeAsync } from "@/helpers/backend_helpers/admin_helpers";
 import { useEffect, useState } from "react";
+import { Col, Row } from "reactstrap";
 
 const CompanyProfile = () => {
         
     //Data State
     const [ profileData, setProfileData] =  useState({})
-
+    const [ catchError, setCatchError ] =  useState("")
     const onLoadAsync = () => { }
 
     const perfil_onSelected = async({ data }) => {
@@ -66,35 +67,42 @@ const CompanyProfile = () => {
                     </div>
                 </div>
                 {/* <!-- Ls widget --> */}
+                <Row>
+                    <Col xl={6}>
+                        <div className="ls-widget">
+                            <div className="tabs-box">
+                                <div className="widget-title pb-1">
+                                    <h4>Sucursales</h4>
+                                    <button type="button" className="btn btn-outline-primary">
+                                        <span className="flaticon-add " /> {" Nuevo"}
+                                    </button>
+                                </div>
+                                {/* End .widget-title */}
+                                <div className="widget-content">
+                                    <BrandsDataTable data = { profileData.sucursales } />
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xl={6}>
+                        <div className="ls-widget">
+                            <div className="tabs-box">
+                                <div className="widget-title">
+                                    <h4>Puntos de Venta</h4>
+                                </div>
+                                {/* End .widget-title */}
 
-                <div className="ls-widget">
-                    <div className="tabs-box">
-                        <div className="widget-title pb-1">
-                            <h4>Sucursales</h4>
-                            <button type="button" className="btn btn-outline-primary">
-                                <span className="flaticon-add " /> {" Nuevo"}
-                            </button>
+                                <div className="widget-content">
+                                    {/* <ContactInfoBox /> */}
+                                </div>
+                            </div>
                         </div>
-                        {/* End .widget-title */}
-                        <div className="widget-content">
-                            <BrandsDataTable data = { profileData.sucursales } />
-                        </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
+              
                 {/* <!-- Ls widget --> */}
 
-                <div className="ls-widget">
-                    <div className="tabs-box">
-                        <div className="widget-title">
-                            <h4>Puntos de Venta</h4>
-                        </div>
-                        {/* End .widget-title */}
-
-                        <div className="widget-content">
-                            {/* <ContactInfoBox /> */}
-                        </div>
-                    </div>
-                </div>
+               
                 {/* <!-- Ls widget --> */}
             </div>
         </div>      

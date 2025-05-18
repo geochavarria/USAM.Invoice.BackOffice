@@ -24,8 +24,9 @@ const HeaderNavContent = () => {
           {homeItems.map((menu, i) => (
        
               <li key={i}
-                className={ ` ${isActiveLink(menu.routePath, pathname) ? "current"  : ""} dropdown` }>
-                <span>{menu.name}</span>
+                className={ ` ${isActiveLink(menu.routePath, pathname) ? "current"  : ""} ${ menu.items ? "dropdown" : ""}` }>
+                { menu.items ? <span>{menu.name}</span> : <Link to={menu.routePath}>{menu.name}</Link>}
+                
                 {menu.items && (<>
                   <ul>
                   {menu.items.map((item, i) => (

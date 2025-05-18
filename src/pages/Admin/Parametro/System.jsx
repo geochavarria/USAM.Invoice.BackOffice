@@ -94,7 +94,7 @@ const System = () => {
                             <div className="title-box mb-1 d-flex flex-row justify-content-between">
                                 <div className="info-box ">
                                     <h3 className="mb-0">{p.nombre}</h3>
-                                    <span className="fs-7">{" "} {p.descripcion}</span>
+                                    <span className="fs-7">{p.abreviado} - {p.descripcion}</span>
                                 </div>
                                 <div className="edit-box">
                                     <span className="year">{parameterType[p.tipo]}</span>

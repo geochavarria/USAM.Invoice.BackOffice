@@ -8,14 +8,18 @@ import HeaderNavContent from "./HeaderNavContent";
 import { isActiveLink } from "../../utils/linkActiveChecker";
 
 import logoLight from "@/assets/images/logo-light.png"
-
+import companyImg from "@/assets/images/resource/company-1.png"
 import { useLocation } from "react-router-dom";
+import userMenuData from "@/data/userMenuData";
+import { useProfile } from "@/common/hooks/UserProfile";
 
 const DashboardHeader = () => {
     const { pathname } = useLocation();
+    const { userProfile } =  useProfile();
+
+
     const [navbar, setNavbar] = useState(false);
 
-    const employerMenuData = []
 
     const changeBackground = () => {
         if (window.scrollY >= 0) {
@@ -82,14 +86,14 @@ const DashboardHeader = () => {
                                 <img
                                     alt="avatar"
                                     className="thumb"
-                                    src="/images/resource/company-6.png"
+                                    src={companyImg}
                                    
                                 />
-                                <span className="name">My Account</span>
+                                <span className="name">{ userProfile.usuario}</span>
                             </a>
 
                             <ul className="dropdown-menu">
-                                {employerMenuData.map((item) => (
+                                {userMenuData.map((item) => (
                                     <li
                                         className={`${
                                             isActiveLink(
@@ -103,7 +107,7 @@ const DashboardHeader = () => {
                                     >
                                         <Link to={item.routePath}>
                                             <i
-                                                className={`la ${item.icon}`}
+                                                className={`fa ${item.icon}`}
                                             ></i>{" "}
                                             {item.name}
                                         </Link>

@@ -1,11 +1,24 @@
 export const homeItems = [
     {
       name: "Dashboard",
-      routePath: "/dashboard",
+      routePath: "/dashboard"
     },
     {
       name: "Facturación",
-      routePath: "#section-info",
+      items: [
+        {
+          name: "Documentos Transmitidos",
+          routePath: "/Facturas/Documentos",
+        },
+        {
+          name: "Importar Documentos",
+          routePath: "/Facturas/Importar",
+        },
+        {
+          name: "Administrador de Archivos",
+          routePath: "/Facturas/Archivos",
+        },
+      ],
     },
     {
       name: "Gestión/Eventos",

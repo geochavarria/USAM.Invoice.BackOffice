@@ -34,9 +34,9 @@ $breakpoints: (
 }
 
 body {
-  font-size: 16px;
+  font-size: 14px;
   color: #363636;
-  line-height: 28px;
+  // line-height: 28px;
   font-weight: 400;
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
@@ -209,7 +209,9 @@ li {
 .fs-10 {
   font-size: 10px !important;
 }
-
+.fs-11 {
+  font-size: 11px !important;
+}
 
 /*PDFViewer*/
 div.page {
@@ -248,7 +250,11 @@ pre[class*=language-] {
 }
 
 
-/**/
+/*
+:::::::::::::::::::::::::::::::::::::
+          table
+:::::::::::::::::::::::::::::::::::::
+*/
 .default-table tr td, .default-table tr th  {
   padding:5px 15px !important
 }
@@ -257,6 +263,53 @@ pre[class*=language-] {
   color: var(--bs-table-color-state), var(--bs-table-color-type, var(--bs-table-color));
 }
 
+.table-nowrap {
+
+  th,
+  td {
+      white-space: nowrap;
+  }
+}
+
+
 th {
   font-weight: 500;
+}
+
+
+
+
+/***/
+.card-animate{
+  transition: all 0.4s;
+
+  &:hover{
+      transform: translateY(calc(-1.5rem / 5));
+      box-shadow: 0 5px 10px rgba(30, 32, 37, .12);
+  }
+}
+
+
+
+/*
+::::::::::::::::::::::::::::::
+    Loading Spinner Modal 
+::::::::::::::::::::::::::::::
+*/
+.container-loading {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 9998;
+  text-align: center;
+
+  .loading-content {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      vertical-align: center;
+  }
+
 }

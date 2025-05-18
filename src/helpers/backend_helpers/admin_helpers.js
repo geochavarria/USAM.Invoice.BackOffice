@@ -1,8 +1,8 @@
-import { API_URL, APP_ID, API_KEY }  from "@/config"
+import { API_URL, APP_ID, APP_KEY }  from "@/config"
 import { APIClient } from "../api_helper";
 import * as url from "../url_helpers/admin_url";
 
-const api = new APIClient(API_URL, APP_ID, API_KEY);
+const api = new APIClient(API_URL, APP_ID, APP_KEY);
 
 
 

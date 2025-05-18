@@ -182,9 +182,9 @@ const CustomTable = ({
                 </div>}
                 {children}
             </div>}
-            <SimpleBar autoHide={false} className="simplebar-track-primary px-3 simplebar-scrollable-x" id={"simpleBarContent"}>
+            <SimpleBar autoHide={false} className="simplebar-track-primary simplebar-scrollable-x" id={"simpleBarContent"}>
                 <div className={divClass +" mb-0"} >
-                    <Table className={tableClass}>
+                    <Table hover className={tableClass}>
                         <thead className={theadClass}>
                             {getHeaderGroups().map((headerGroup, index) => (
                                 <tr key = { headerGroup.id } className ={ `${trClass}` }>
@@ -290,7 +290,7 @@ const CustomTable = ({
                         <PaginationLink onClick={ ()=> previousPage() } > ← </PaginationLink>
                     </PaginationItem>
                     <PaginationItem >
-                        <PaginationLink> Página{" "}<strong>{ pagination.pageIndex + 1 } of {getPageOptions().length} </strong> </PaginationLink>
+                        <PaginationLink> {" "}<strong>{ pagination.pageIndex + 1 } de {getPageOptions().length} </strong> </PaginationLink>
                     </PaginationItem>
                     <PaginationItem disabled={!getCanNextPage()}>
                         <PaginationLink  onClick={()  => nextPage()  }> → </PaginationLink>

@@ -101,7 +101,7 @@ const SystemForm = ({
         setCatchError("")
         if(show){
             const { codigo } =  data
-            
+            setParametroSistema(data)
             setIsEdit((codigo || 0) > 0 )
             if((codigo || 0) == 0) return;
             parametroSistema_onLoadAsync(codigo)

@@ -7,6 +7,8 @@ import rootReducer from "./reducers";
 
 
 let persistConfig = {}
+
+
 if(process.env.NODE_ENV === "development"){
     persistConfig = {
       key: STORAGE.PERSIST_KEY,
@@ -16,7 +18,7 @@ if(process.env.NODE_ENV === "development"){
     persistConfig = {
         key: STORAGE.PERSIST_KEY,
         storage,
-        whiteList: ["System, Login, Contabilidad"],
+        whiteList: ["System, Login"],
         transforms:[
             encryptTransform({
                 secretKey : "$$ooPs_BUG2220",
@@ -43,7 +45,7 @@ const persistor =  persistStore(store)
 const resetStore = async () => {
     await  persistor.purge();
     await persistor.flush();
-    localStorage.removeItem(`persist:${config.Storage.PERSIST_KEY}`)
+    localStorage.removeItem(`persist:${STORAGE.PERSIST_KEY}`)
 }
 
 export { store, persistor, resetStore}

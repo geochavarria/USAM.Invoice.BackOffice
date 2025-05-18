@@ -1,6 +1,7 @@
 import CustomCatchError from "@/components/common/CustomCatchError";
 import { SelectActividadEconomica, SelectDepartamento, SelectDistrito, SelectDomicilioFiscal, SelectMunicipio, SelectPais } from "@/components/controls/Catalogos";
 import { getEmpresaByCodeAsync } from "@/helpers/backend_helpers/admin_helpers";
+import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 
 const FormProfile = ({ data }) => {
@@ -8,9 +9,61 @@ const FormProfile = ({ data }) => {
    //Data State
    const [ profileData, setProfileData] =  useState({})
 
+   //Trigger State
    const [ catchError, setCatchError ]=  useState("")
 
+
+
     const onLoadAsync = () => { }
+
+    const validationData = useFormik({
+        enableReinitialize : true,
+        initialValues: {
+            codigo: (profileData && profileData.codigo) || 0,
+            abreviado : (profileData && profileData.abreviado) || "",
+            nombre : (profileData && profileData.nombre) || "",
+            nombre_comercial : (profileData && profileData.nombre_comercial) || "",
+            nit : (profileData && profileData.nit) || "",
+            nrc : (profileData && profileData.nrc) || "",
+            codace : (profileData && profileData.codace) || "",
+            coddep : (profileData && profileData.coddep) || "00",
+            codmun : (profileData && profileData.codmun) || "00",
+            codpai : (profileData && profileData.codpai) || "",
+            coddfi : (profileData && profileData.coddfi) || 0,
+            codmun_dis : (profileData && profileData.codmun_dis) || "00",
+        },
+        onSubmit:async(values) => {
+            setIsSaving(true)
+            try{
+
+                return;
+                let response = await postParametroUpsertAsync({
+                    code : values.codigo,
+                    data: values
+                });
+
+                toast.info(isEdit ? MessageTitle.MSG_INFO_ACTUALIZAR : MessageTitle.MSG_INFO_REGISTRO,{ 
+                    position: 'top-right', 
+                    hideProgressBar: false, 
+                    closeOnClick: false
+                })
+    
+                onConfirm({
+                    originalEvent : null,
+                    data : response.data,
+                    index : -1
+                })
+
+
+                modalToggle_onClick()
+            }catch(ex){
+                setCatchError(ex)
+            }finally{
+                setIsSaving(false)
+            }
+        }
+    })
+
 
     useEffect(()=> {
         setProfileData(data);
@@ -27,8 +80,9 @@ const FormProfile = ({ data }) => {
                         type="text"
                         name="nombre"
                         placeholder="Nombre o  Razón Social"
-                        value = { profileData.nombre || "" }
-                        onChange={e => { }}
+                        onBlur={validationData.handleBlur}
+                        onChange={validationData.handleChange}
+                        value = { validationData.values.nombre || "" }
                         required
                     />
                 </div>
@@ -39,8 +93,9 @@ const FormProfile = ({ data }) => {
                         type="text"
                         name="nombre_comercial"
                         placeholder="Nombre o  Razón Social"
-                        onChange={e => { }}
-                        value = { profileData.nombre_comercial || ""}
+                        onBlur={validationData.handleBlur}
+                        onChange={validationData.handleChange}
+                        value = { validationData.values.nombre_comercial || ""}
                         required
                     />
                 </div>
@@ -52,8 +107,9 @@ const FormProfile = ({ data }) => {
                         type="text"
                         name="nit"
                         placeholder="9999-999999-999-9"
-                        value = { profileData.nit  || ""}
-                        onChange={e => { }}
+                        value = { validationData.values.nit  || ""}
+                        onBlur={validationData.handleBlur}
+                        onChange={validationData.handleChange}
                         required
                     />
                 </div>
@@ -65,8 +121,9 @@ const FormProfile = ({ data }) => {
                         type="text"
                         name="nrc"
                         placeholder="999999"
-                        value = { profileData.nrc || "" }
-                        onChange={e => { }}
+                        value = { validationData.values.nrc || "" }
+                        onBlur={validationData.handleBlur}
+                        onChange={validationData.handleChange}
                         required
                     />
                 </div>
@@ -75,8 +132,8 @@ const FormProfile = ({ data }) => {
                 <div className="form-group col-lg-6 col-md-12">
                     <label>País </label>
                     <SelectPais
-                        onOptionSelect ={e => {}}
-                        setDefaultValue={profileData.codpai}
+                        onOptionSelect ={({data}) => validationData.setFieldValue("codpai", data.value)}
+                        setDefaultValue={validationData.values.codpai}
                     />
                 </div>
 
@@ -86,28 +143,28 @@ const FormProfile = ({ data }) => {
                     <SelectDepartamento
                         isSearch = { true }
                         onError={e => setCatchError(e)}
-                        onOptionSelect ={e => {}}
-                        setDefaultValue={profileData.coddep}
+                        onOptionSelect ={({data}) => validationData.setFieldValue("coddep", data.value)}
+                        setDefaultValue={validationData.values.coddep}
                     />
                 </div>
 
                 <div className="form-group col-lg-4 col-md-6">
                     <label>Municipio</label>
                     <SelectMunicipio
-                        parentID = { profileData.coddep }
+                        parentID = { validationData.values.coddep }
                         onError={e => setCatchError(e)}
-                        onOptionSelect ={e => {}}
-                        setDefaultValue={profileData.codmun}
+                        onOptionSelect ={({data}) => validationData.setFieldValue("codmun", data.value)}
+                        setDefaultValue={validationData.values.codmun}
                     />
                 </div>
                 <div className="form-group col-lg-4 col-md-6">
                     <label>Distrito</label>
                     <SelectDistrito
                         onError={e => setCatchError(e)}
-                        deptoID={ profileData.coddep}
-                        munID={ profileData.codmun}
-                        onOptionSelect ={e => {}}
-                        setDefaultValue={profileData.codmun_dis}
+                        deptoID={ validationData.values.coddep}
+                        munID={ validationData.values.codmun}
+                        onOptionSelect ={({data}) => validationData.setFieldValue("codmun_dis", data.value)}
+                        setDefaultValue={validationData.values.codmun_dis}
                     />
                 </div>
 
@@ -115,8 +172,8 @@ const FormProfile = ({ data }) => {
                     <label>Domicilio Fiscal</label>
                     <SelectDomicilioFiscal
                         onError={e => setCatchError(e)}
-                        onOptionSelect ={e => {}}
-                        setDefaultValue={profileData.coddfi}
+                        onOptionSelect ={({data}) => validationData.setFieldValue("coddfi", data.value)}
+                        setDefaultValue={validationData.values.coddfi}
                     />
                 </div>
 
@@ -124,8 +181,8 @@ const FormProfile = ({ data }) => {
                     <label>Actividad Económica</label>
                     <SelectActividadEconomica
                         onError={e => setCatchError(e)}
-                        onOptionSelect ={e => {}}
-                        setDefaultValue={profileData.codace}
+                        onOptionSelect ={({data}) => validationData.setFieldValue("codace", data.value)}
+                        setDefaultValue={validationData.values.codace}
                     />
                 </div>
 

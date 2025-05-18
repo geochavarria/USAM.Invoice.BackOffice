@@ -7,7 +7,7 @@ import {
   SubMenu,
 } from "react-pro-sidebar";
 
-import mobileMenuData from "@/data/mobileMenuData";
+import {homeItems as mobileMenuData} from "@/data/mainMenuData";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
 
@@ -35,18 +35,32 @@ const Index = () => {
 
         <Sidebar>
           <Menu>
-            {mobileMenuData.map((item, i) => (
-             <MenuItem
+          {mobileMenuData.map((item, index) => (
+              <SubMenu
                 className={
-                isActiveLink(item.routePath, pathname)
-                    ? "menu-active-link"
+                  isActiveParentChaild(item.items, pathname)
+                    ? "menu-active"
                     : ""
                 }
-                key={i}
-                component={<Link href={item.routePath} />}
-            >
-                {item.name}
-            </MenuItem>
+                label={item.name}
+                key={"menu"+index}
+              >
+                {(item.items || []).map((menuItem, i) => (
+                  <MenuItem
+
+                  onClick={()=>navigate(menuItem.routePath)}
+                    className={
+                      isActiveLink(menuItem.routePath, pathname)
+                        ? "menu-active-link"
+                        : ""
+                    }
+                    key={"submenu"+i}
+                    // routerLink={<Link to={menuItem.routePath} />}
+                  >
+                    {menuItem.name}
+                  </MenuItem>
+                ))}
+              </SubMenu>
             ))}
           </Menu>
         </Sidebar>

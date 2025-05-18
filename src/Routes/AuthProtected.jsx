@@ -1,28 +1,32 @@
+import { useProfile } from "@/common/hooks/UserProfile";
+import { setAuthorization } from "@/helpers/api_helper";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 
 const AuthProtected = (props) => {
     const dispatch = useDispatch();
-    // const { userProfile, loading, token , isLockScreen } = useProfile();
+    const { userProfile, loading, token , isLockScreen } = useProfile();
     
-    // useEffect(() => {
-    //   if (userProfile && !loading && token) {
-    //     setAuthorization(token);
-    //   } else if (!userProfile && loading && !token) {
-    //     dispatch(logoutUser());
-    //   }
-    // }, [token, userProfile, loading, dispatch]);
+    useEffect(() => {
+      if (userProfile && !loading && token) {
+        setAuthorization(token);
+      } else if (!userProfile && loading && !token) {
+        dispatch(logoutUser());
+      }
+    }, [token, userProfile, loading, dispatch]);
   
     /*
       redirect is un-auth access protected routes via url
     */
-    // if (!userProfile && loading && !token) {
-    //   return (
-    //     <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
-    //   );
-    // }else if (isLockScreen){
-    //   return(<Navigate to={"/auth-lockscreen-cover" } />)
-    // }
+    if (!userProfile.usr_codigo && !loading && !token) {
+      return (
+        <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
+      );
+    }else if (isLockScreen){
+      return(<Navigate to={"/auth-lockscreen-cover" } />)
+    }
   
     
     return <>{ props.children }</>;

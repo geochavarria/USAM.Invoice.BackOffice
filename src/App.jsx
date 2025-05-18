@@ -13,13 +13,10 @@ import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import "react-toastify/dist/ReactToastify.css";
 import 'simplebar-react/dist/simplebar.min.css';
 
-
-
 import { ToastContainer } from "react-toastify";
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
-
 
 function App() {
   useEffect(() => {

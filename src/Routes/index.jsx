@@ -4,6 +4,7 @@ import VerticalLayout from "@/layout"
 
 import { authProtectedRoutes, publicRoutes } from "./allRoutes";
 import { AccessRouteAuth, AuthProtected } from './AuthProtected';
+import NonAuthLayout from '@/layout/NonAuthLayout';
 
 
 const Index = () => {
@@ -13,7 +14,11 @@ const Index = () => {
             {publicRoutes.map((route, idx) => (
                 <Route
                     path={ route.path }
-                    element={ route.component }
+                    element={
+                        <NonAuthLayout>
+                            { route.component }
+                        </NonAuthLayout>   
+                    }
                     key={idx}
                 />
             ))}

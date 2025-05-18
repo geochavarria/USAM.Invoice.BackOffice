@@ -179,7 +179,7 @@ const APIManager = () => {
                           </div>
                       </div>
                     </div>
-                    <div className="card-body msg_card_body p-0">
+                    <div className="card-body msg_card_body p-3">
                       <CustomTable
                           isGlobalFilter={true}
                           data={dataSource}

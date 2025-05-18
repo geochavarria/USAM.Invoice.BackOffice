@@ -2,6 +2,13 @@ import moment from "moment";
 import 'moment/locale/es'
 
 
+
+export const dateToNormal = (dateValue) => {
+    return moment(dateValue).format("DD/MM/YYYY");
+}
+
+
+
 export const dateTimeToNormal = (dateValue) => {
     return moment(dateValue).format("DD/MM/YYYY HH:mm:ss a");
 }
