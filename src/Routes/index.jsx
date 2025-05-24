@@ -11,7 +11,7 @@ const Index = () => {
     return(
         <React.Fragment>
             <Routes>
-            {publicRoutes.map((route, idx) => (
+                {publicRoutes.map((route, idx) => (
                 <Route
                     path={ route.path }
                     element={
@@ -21,9 +21,8 @@ const Index = () => {
                     }
                     key={idx}
                 />
-            ))}
+                ))}
             
-                <Route>
                 {authProtectedRoutes.map((route, idx) => (
                     <Route
                         path={ route.path }
@@ -39,7 +38,6 @@ const Index = () => {
                         key={idx}
                     />
                 ))}
-                </Route>
             </Routes>
             
         </React.Fragment>

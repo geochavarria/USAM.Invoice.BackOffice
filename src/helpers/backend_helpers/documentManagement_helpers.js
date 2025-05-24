@@ -12,7 +12,6 @@ export const getFileByDirectoryPathAsync = (path) => api.get(`${url.GET_FILE_BY_
     responseType: 'blob' 
 })
 
-
 export const getInvoiceDocumentByCodeAsync = (code) => api.get(`${url.GET_INVOICE_DOCUMENT_BY_CODE}/${code}`);
 export const getAllDocumentPagedAsync = ({ page, pageSize, fechaDesde, fechaHasta, docID, sucID, appID, searchTerm }) => 
     api.get(url.GET_ALL_DOCUMENT_PAGED, {

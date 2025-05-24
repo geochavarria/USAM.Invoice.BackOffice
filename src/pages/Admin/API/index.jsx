@@ -64,6 +64,19 @@ const APIManager = () => {
     setShowFormModal(true)
   }
 
+  const API_onEndEdit = (e) => {
+      const { data } = e
+      const idx =  dataSource.findIndex(x => x.codigo === data.codigo)
+      if(idx < 0) {
+        setDataSource(p => ([...p, data]))
+      };
+
+      setDataSource(p => {
+          p[idx] =  data;
+          return [...p]
+      })
+  }
+
 
   const columnsDefinition = useMemo(()=> {
       let columnsTable = []
@@ -206,7 +219,7 @@ const APIManager = () => {
       <APIForm 
           show={ showFormModal} 
           data = { selectedData } 
-          onConfirm = {e => parameter_onEndEdit(e)}
+          onConfirm = {e => API_onEndEdit(e)}
           onHide={e=> setShowFormModal(false)}/>
     </>
   );

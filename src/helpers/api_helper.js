@@ -1,8 +1,7 @@
 
-import { API_URL  } from "@/config.js"
+import { API_URL, BASE_PATH  } from "@/config.js"
 import axios from "axios";
 
-const rootPath =  import.meta.env.VITE_PUBLIC_URL
 // default
 axios.defaults.baseURL = API_URL;
 // content type
@@ -76,8 +75,7 @@ class APIClient {
                 break;
                 case 401:
                     message = "Invalid credentials";
-                    console.log(`${rootPath}/logout`)
-                    document.location.href=`${rootPath}/logout`;
+                    document.location.href=`${BASE_PATH}/logout`;
                 break;
                 case 404:
                     text = undefined

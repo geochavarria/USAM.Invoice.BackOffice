@@ -86,7 +86,6 @@ import { getDashboardDocumentResumeYearAsync } from "@/helpers/backend_helpers/d
 
             const { data } =  response
             setProfileResume(data || []);
-            console.log(data)
         } catch (error) {
             setCatchError(error)
         }

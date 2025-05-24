@@ -1,3 +1,4 @@
+export const BASE_PATH =  import.meta.env.VITE_PUBLIC_URL
 export const API_URL = import.meta.env.VITE_API_URL
 export const APP_ID =  import.meta.env.VITE_APPId
 export const APP_KEY = import.meta.env.VITE_APP_KEY;

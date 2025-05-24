@@ -3,6 +3,8 @@
   --primary-hover-bg-color: #0146a6;
   --primary-2nd-color: #f9ab00;
   --primary-2nd-hover-bg-color: #e9a000;
+
+  --spacing: .25rem;
 }
 
 a {
@@ -41,6 +43,11 @@ body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
+  font-family: "Jost", sans-serif;
+  font-style: normal;
+}
+
+.fs-secondary{
   font-family: "Jost", sans-serif;
   font-style: normal;
 }
@@ -312,4 +319,66 @@ th {
       vertical-align: center;
   }
 
+}
+
+/*
+::::::::::::::::::::::::::::::
+   GAP CSS
+::::::::::::::::::::::::::::::
+*/
+.grid {
+    display: grid
+}
+
+.gap-0\.5 {
+    gap: calc(var(--spacing)*.5)
+}
+
+.gap-1\.25 {
+    gap: calc(var(--spacing)*1.25)
+}
+
+.gap-1\.5 {
+    gap: calc(var(--spacing)*1.5)
+}
+
+.gap-2\.5 {
+    gap: calc(var(--spacing)*2.5)
+}
+
+.gap-6 {
+    gap: calc(var(--spacing) * 6);
+}
+
+/*::::::::::::::::::::::::::::::
+  AVATAR
+::::::::::::::::::::::::::::::
+*/
+
+.avatar-xxs {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.avatar-title {
+    align-items: center;
+    background-color: #405189;
+    background-color: var(--vz-primary);
+    color: #fff;
+    display: flex;
+    font-weight: var(--vz-font-weight-medium);
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.avatar-xs {
+    height: 2rem;
+    width: 2rem;
+}
+
+/***/
+.border-bottom-dashed {
+    border-bottom-style: dashed !important;
 }

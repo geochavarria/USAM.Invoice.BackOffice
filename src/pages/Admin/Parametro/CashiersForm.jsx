@@ -79,7 +79,6 @@ const CashiersForm = ({
             setUsuarioData(data)
         }
     }, [show, data])
-    console.log(validationData.values)
   return (
 
     <Modal

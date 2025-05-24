@@ -12,6 +12,7 @@ const authProtectedRoutes = [
     { path: "/logout", component: <Logout /> },
     { path: "/", component:  <Navigate  to="/login"  />,},
     { path: "*",  component:  <Navigate  to="/404-NotFound"  replace /> },
+
 ]
 
 

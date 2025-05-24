@@ -92,12 +92,12 @@ const APIForm = ({
 
     useEffect(()=> {
         setShowModal(show);
-       
         setCatchError("")
         if(show){
             const { codigo } =  data
             setIsEdit((codigo || "").trim())
             setApiManager(data)
+            validationData.resetForm()
         }
     }, [show, data])
   return (

@@ -1,6 +1,6 @@
 import { setAuthorization } from "@/helpers/api_helper";
 import { apiError, logoutUserSuccess, reset_login_flag, setLoginSuccess } from "./reducer";
-import { APP_AUTH, STORAGE } from "@/config";
+import { APP_AUTH, BASE_PATH, STORAGE } from "@/config";
 import { postLoginJwtAsync } from "@/helpers/backend_helpers/authenticate_helper";
 
 export const loginUser = (user, history) => async(dispatch) => {
@@ -38,7 +38,7 @@ export const loginUser = (user, history) => async(dispatch) => {
     //     data : companyList 
     //   }))
   
-     window.location.href = import.meta.env.VITE_PUBLIC_URL +  "/Facturas/Documentos"
+     window.location.href = BASE_PATH +  "/dashboard"
     } catch (error) {
       dispatch(apiError(error));
     }

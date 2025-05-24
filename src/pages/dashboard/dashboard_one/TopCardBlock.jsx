@@ -29,7 +29,7 @@ const TopCardBlock = () => {
         {cardContent.map((item, index) => (
           <div
             className="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12"
-            key={item.index}
+            key={index}
           >
             <div className={`ui-item ui-${item.badge}`}>
               <div className="left">

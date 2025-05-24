@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, DropdownItem, DropdownMenu, DropdownToggle, Input, Row, Table, UncontrolledDropdown } from "reactstrap";
 import Flatpickr from "react-flatpickr";
 import classNames from "classnames";
-import "flatpickr/dist/themes/material_green.css";
+
 import { SelectTipoDocumento } from "@/components/controls/Catalogos";
 import { SelectApplication, SelectSucursal } from "@/components/controls/Admin";
 import SimpleBar from "simplebar-react";

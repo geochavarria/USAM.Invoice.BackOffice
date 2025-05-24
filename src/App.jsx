@@ -14,9 +14,18 @@ import "react-toastify/dist/ReactToastify.css";
 import 'simplebar-react/dist/simplebar.min.css';
 
 import { ToastContainer } from "react-toastify";
+import { BASE_PATH } from './config';
+
+
+
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
+
+import moment from 'moment';
+import 'moment/locale/es';
+moment().locale("es")
+
 
 function App() {
   useEffect(() => {
@@ -26,11 +35,10 @@ function App() {
     });
   }, []);
 
-
   return (
     <React.Fragment>
         <div className="page-wrapper">
-          <BrowserRouter>
+          <BrowserRouter basename={BASE_PATH}>
             <Route />
             <ScrollTopBehaviour/>
           </BrowserRouter>

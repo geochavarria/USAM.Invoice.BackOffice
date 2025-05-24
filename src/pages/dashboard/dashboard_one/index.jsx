@@ -1,6 +1,8 @@
 import React from "react";
 import TopCardBlock from "./TopCardBlock";
 import ProfileChart from "./ProfileChart";
+import ApplicationResume from "./ApplicationResume";
+import DocumentResume from "./DocumentResume";
 
 
 
@@ -20,7 +22,17 @@ const DashboardOne =()=>{
             </div>
             {/* End profile chart */}
           </div>
-            {/* End .col */}
+          {/* End .col */}
+          <div className="col-xl-5 col-lg-6 col-md-12">
+            <div className="notification-widget ls-widget">
+              <ApplicationResume />
+            </div>
+          </div>
+          <div className="col-xl-5 col-lg-6 col-md-12">
+            <div className="notification-widget ls-widget">
+              <DocumentResume />
+            </div>
+          </div>
         </div>
     </React.Fragment>)
 }
