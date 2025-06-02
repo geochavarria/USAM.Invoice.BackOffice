@@ -62,7 +62,14 @@ const Index = () => {
                 ))}
               </SubMenu>
             ))}
+
+
+          <MenuItem
+               onClick={()=>navigate("/logout")}
+          >Cerrar Sesion</MenuItem>
           </Menu>
+
+         
         </Sidebar>
 
       <SidebarFooter />

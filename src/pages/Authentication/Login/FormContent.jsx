@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser, resetLoginFlag } from "@/slices/thunks";
-import { Alert, Form, FormFeedback, Input } from "reactstrap";
+import { Alert, Button, Form, FormFeedback, Input, Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 import { CatchErrorMessage } from "@/components/common/CustomCatchError";
 
@@ -18,7 +18,6 @@ const FormContent = (props) => {
 
     //Trigger State
     const [ showPassword, setShowPassword] =  useState(false)
-    const [ isLoading, setIsLoading ] =  useState(false)
     const [ capsLockOn, setCapsLockOn] =  useState(false)
 
     const selectLayoutState = (state) => state.Login;
@@ -33,6 +32,7 @@ const FormContent = (props) => {
 
     const {
         errorMsg,
+        loading,
         error
     } = useSelector(selectLayoutProperties);
 
@@ -46,15 +46,13 @@ const FormContent = (props) => {
             username: Yup.string().required("Por favor ingrese su usuario"),
             password: Yup.string().required("Por favor ingrese su contraseña"),
         }),
-        onSubmit: (values) => {
+        onSubmit: async(values) => {
             try {
-                setIsLoading(true)
-                
                 dispatch(loginUser(values, navigate));
             } catch (error) {
-                console.log(error)
+                //console.log(error)
             }finally{
-                setIsLoading(false)
+              //
             }
           
         }
@@ -78,7 +76,8 @@ const FormContent = (props) => {
 
   return (
     <div className="form-inner">
-      <h3 className="text-primary">Invoice Hub -Back Office</h3>
+      <h1 className="text-primary">Invoice Hub Back Office</h1>
+      <h6 className="text-white mb-5">Administración de Transmisión de Factura Electrónica</h6>
 
       {/* <!--Login Form--> */}
       <Form method="post" autoComplete="off"
@@ -90,10 +89,10 @@ const FormContent = (props) => {
 
         {error && error ? (<Alert color="danger">  { CatchErrorMessage(error).complete } </Alert>) : null}
         <div className="form-group">
-          <label>Usuario</label>
+          <label className="text-white">Usuario</label>
           <Input type="text" 
             name="username" 
-            placeholder="Username" 
+            placeholder="Usuario" 
             onChange={validation.handleChange}
             onBlur={validation.handleBlur}
             value={validation.values.username || ""}
@@ -108,7 +107,7 @@ const FormContent = (props) => {
         {/* name */}
 
         <div className="form-group">
-          <label>Contraseña</label>
+          <label className="text-white">Contraseña</label>
           <Input id="txtPasswordfield"
             type="password"
             name="password"
@@ -119,7 +118,7 @@ const FormContent = (props) => {
             invalid={
                 validation.touched.password && validation.errors.password ? true : false
             }
-            placeholder="Password"
+            placeholder="Contraseña"
           />
             {validation.touched.password && validation.errors.password ? (
                 <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
@@ -130,26 +129,28 @@ const FormContent = (props) => {
         {/* password */}
 
         <div className="form-group">
-          <button
+          <Button
             className="theme-btn btn-style-one"
             type="submit"
+            disabled={loading}
             name="log-in"
           >
+            { loading && <Spinner size={"sm"}  className="mx-2"/>}
             Iniciar
-          </button>
+          </Button>
         </div>
         {/* login */}
       </Form>
       {/* End form */}
 
       <div className="bottom-box">
-        <div className="text">
+        <div className="text-white">
          ¿No tienes acceso? <Link to="/#">Contácte al administrador</Link>
         </div>
 
         <div className="divider">
-          <span>Sign In by</span>
-          <p><strong>UOnline</strong><span className="text-danger">Auth</span></p>
+          <span className="px-2"> Sign In by </span>
+          <p className="text-white"><strong>UOnline</strong><span className="text-danger">Auth</span></p>
         </div>
 
       </div>

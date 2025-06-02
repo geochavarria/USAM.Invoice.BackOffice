@@ -1,6 +1,9 @@
 export const GET_ALL_EMPRESA= "/Administracion/Empresa/GetAll"
 export const GET_EMPRESA_PERFIL_BY_CODE = "/Administracion/Empresa/GetByID";
 export const GET_SUCURSAL_BY_EMPRESA_CODE = "/Administracion/Sucursal/GetByEmp";
+export const PUT_SUCURSAL_BY_EMPRESA_UPSERT = "/Administracion/Sucursal/Empresa";
+
+
 
 export const GET_ALL_API_KEYS = "/Administracion/APIManager/GetAll"
 export const GET_API_KEYS_BY_SUC = "/Administracion/APIManager/GetBySuc"

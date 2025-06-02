@@ -1,11 +1,14 @@
 import { setAuthorization } from "@/helpers/api_helper";
-import { apiError, logoutUserSuccess, reset_login_flag, setLoginSuccess } from "./reducer";
+import { apiError, logoutUserSuccess, reset_login_flag, setLoading, setLoginSuccess } from "./reducer";
 import { APP_AUTH, BASE_PATH, STORAGE } from "@/config";
 import { postLoginJwtAsync } from "@/helpers/backend_helpers/authenticate_helper";
 
 export const loginUser = (user, history) => async(dispatch) => {
     try {
       let response;
+      dispatch(setLoading({}));
+
+
       if (APP_AUTH.DEFAULT === "jwt") {
         
         response = await postLoginJwtAsync({

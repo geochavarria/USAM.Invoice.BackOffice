@@ -22,6 +22,12 @@ const loginSlice = createSlice({
         state.isLockScreen =  false;
         state.errorMsg = true;
       },
+
+      setLoading(state, action){
+        return {...state, 
+          loading : true,
+        }
+      },
   
       setLoginSuccess(state, action) {
         const { payload } = action;
@@ -60,6 +66,7 @@ const loginSlice = createSlice({
 export const {
     apiError,
     setLoginSuccess,
+    setLoading,
     logoutUserSuccess,
     reset_login_flag,
     lockScreenSuccess,

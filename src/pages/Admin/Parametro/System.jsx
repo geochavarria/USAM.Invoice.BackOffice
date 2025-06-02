@@ -62,8 +62,13 @@ const System = () => {
 
 
     const CodePreComponent = ({ item } ) => {
+
+        let valueDsc = item.valor
+        if(item.tipo === "B" ){
+             valueDsc = valueDsc === "0" ? "No" : "Sí";
+        } 
         return (<><pre className="language-markup rounded-2" 
-             style={{whiteSpace: "pre-wrap", wordWrap: "break-word"}}>{item.valor}</pre>
+             style={{whiteSpace: "pre-wrap", wordWrap: "break-word"}}>{valueDsc}</pre>
         </>)
     }
 

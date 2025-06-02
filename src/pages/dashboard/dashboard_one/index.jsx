@@ -15,7 +15,7 @@ const DashboardOne =()=>{
           <TopCardBlock />
         </div>
         <div className="row">
-          <div className="col-xl-7 col-lg-12">
+          <div className="col-xxl-5 col-xl-6 col-lg-6 col-md-12">
             {/* <!-- Graph widget --> */}
             <div className="graph-widget ls-widget">
               <ProfileChart />
@@ -23,12 +23,12 @@ const DashboardOne =()=>{
             {/* End profile chart */}
           </div>
           {/* End .col */}
-          <div className="col-xl-5 col-lg-6 col-md-12">
+          <div className="col-xxl-3 col-xl-6 col-lg-6 col-md-12">
             <div className="notification-widget ls-widget">
               <ApplicationResume />
             </div>
           </div>
-          <div className="col-xl-5 col-lg-6 col-md-12">
+          <div className="col-xxl-4 col-lg-6 col-md-12">
             <div className="notification-widget ls-widget">
               <DocumentResume />
             </div>

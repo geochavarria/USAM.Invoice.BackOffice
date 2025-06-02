@@ -8,8 +8,10 @@ const colors = ["#00008B", "#00BFFF", "#FFD700", "#32CD32", "#800000", "#FF4500"
 const ApplicationResume = () => {
 
     const [dataSource, setDataSource ] = useState([])
-    const onLoadAsync = async () => {
-        const response =  await getDashboardDocumentResumeByAppAsync();
+
+    const onLoadAsync = async (monthTerm = 1) => {
+        setDataSource([])
+        const response =  await getDashboardDocumentResumeByAppAsync(monthTerm);
 
         const  { data } =  response;
         setDataSource(data || [])
@@ -19,8 +21,17 @@ const ApplicationResume = () => {
         onLoadAsync();
     }, [])
     return(<React.Fragment>
-        <div className="widget-title px-0 pb-1   border-bottom ">
-            <h4 className="px-3">Aplicaciones</h4>
+        <div className="widget-title ps-0 pb-1   border-bottom ">
+            <h4 className="ps-3">Aplicaciones</h4>
+            <div className="chosen-outer" style={{minWidth: 160}}>
+                {/* <!--Tabs Box--> */}
+                <select className="chosen-single form-select" 
+                onChange={({target})=> onLoadAsync(target.value)} >
+                <option value="1">Este Mes</option>
+                <option value="6">Este Semestre</option>
+                <option value="12">Este Año</option>
+                </select>
+            </div>
         </div>
         <div className="widget-content pt-2">
            

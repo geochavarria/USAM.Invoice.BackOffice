@@ -3,11 +3,18 @@ import BrandsDataTable from "./BrandsDataTable";
 import { getEmpresaByCodeAsync } from "@/helpers/backend_helpers/admin_helpers";
 import { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
+import BrandForm from "./BrandForm";
 
 const CompanyProfile = () => {
         
     //Data State
     const [ profileData, setProfileData] =  useState({})
+    const [ selectedBrand, setSelectedBrand] =  useState({})
+
+    //Modal State
+    const [ showBrandModal, setShowBrandModal] =  useState(false)
+
+    //Trigger State
     const [ catchError, setCatchError ] =  useState("")
     const onLoadAsync = () => { }
 
@@ -46,6 +53,11 @@ const CompanyProfile = () => {
         
     }
 
+    const RowBrandDataTable_onClick = (e)=> {
+        const { data } =  e
+        setSelectedBrand(data)
+        setShowBrandModal(true)
+    }
     useEffect(()=> {
         perfil_onSelected({});
     },[])
@@ -73,13 +85,16 @@ const CompanyProfile = () => {
                             <div className="tabs-box">
                                 <div className="widget-title pb-1">
                                     <h4>Sucursales</h4>
-                                    <button type="button" className="btn btn-outline-primary">
+                                    <button type="button" className="btn btn-outline-primary" onClick={e => RowBrandDataTable_onClick({ data : {codemp :  profileData.codigo}})}>
                                         <span className="flaticon-add " /> {" Nuevo"}
                                     </button>
                                 </div>
                                 {/* End .widget-title */}
                                 <div className="widget-content">
-                                    <BrandsDataTable data = { profileData.sucursales } />
+                                    <BrandsDataTable 
+                                        data = { profileData.sucursales }
+                                        onRowClick={e => RowBrandDataTable_onClick(e)}
+                                        />
                                 </div>
                             </div>
                         </div>
@@ -107,6 +122,11 @@ const CompanyProfile = () => {
             </div>
         </div>      
           
+
+          <BrandForm  
+            show={showBrandModal} 
+            data={selectedBrand}
+            onHide={e => setShowBrandModal(false)}/>
     </>);
 };
 

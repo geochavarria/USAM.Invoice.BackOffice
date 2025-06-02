@@ -6,6 +6,6 @@ const api = new APIClient(API_URL, APP_ID, APP_KEY);
 
 
 export const getDashboardDocumentResumeStatusAsync = () => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_STATUS}`);
-export const getDashboardDocumentResumeYearAsync = () => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_YEAR}`);
-export const getDashboardDocumentResumeByAppAsync = () => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_APP}`);
-export const getDashboardDocumentResumeByTypeAsync = () => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_TYPE}`);
+export const getDashboardDocumentResumeYearAsync = (monthTerm) => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_YEAR}/${monthTerm}`);
+export const getDashboardDocumentResumeByAppAsync = (monthTerm) => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_APP}/${monthTerm}`);
+export const getDashboardDocumentResumeByTypeAsync = (monthTerm ) => api.get(`${url.GET_DASHBOARD_DOCUMENT_RESUME_TYPE}/${monthTerm}`);

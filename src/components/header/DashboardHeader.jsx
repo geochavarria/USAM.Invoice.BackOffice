@@ -12,6 +12,7 @@ import companyImg from "@/assets/images/resource/company-1.png"
 import { useLocation } from "react-router-dom";
 import userMenuData from "@/data/userMenuData";
 import { useProfile } from "@/common/hooks/UserProfile";
+import { UncontrolledTooltip } from "reactstrap";
 
 const DashboardHeader = () => {
     const { pathname } = useLocation();
@@ -64,10 +65,11 @@ const DashboardHeader = () => {
                     {/* End .nav-outer */}
 
                     <div className="outer-box">
-                        <button className="menu-btn">
-                            <span className="count">1</span>
-                            <span className="icon la la-heart-o"></span>
+                        <button className="menu-btn"  id="btnConnection" >
+                            {/* <span className="count">1</span> */}
+                            <span className="icon la la-wifi text-danger"></span>
                         </button>
+                        <UncontrolledTooltip target={"btnConnection"}>Fuera de línea</UncontrolledTooltip>
                         {/* wishlisted menu */}
 
                         <button className="menu-btn">

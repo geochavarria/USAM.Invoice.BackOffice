@@ -80,9 +80,10 @@ import { getDashboardDocumentResumeYearAsync } from "@/helpers/backend_helpers/d
 
   
 
-    const onLoadAsync = async() => {
+    const onLoadAsync = async(monthTerm = 1) => {
         try {
-            const response = await getDashboardDocumentResumeYearAsync()
+            setProfileResume([])
+            const response = await getDashboardDocumentResumeYearAsync(monthTerm)
 
             const { data } =  response
             setProfileResume(data || []);
@@ -100,8 +101,11 @@ import { getDashboardDocumentResumeYearAsync } from "@/helpers/backend_helpers/d
           <h4>Transmisiones</h4>
           <div className="chosen-outer">
             {/* <!--Tabs Box--> */}
-            <select className="chosen-single form-select">
-              <option>Últimos 12 Meses</option>
+            <select className="chosen-single form-select" 
+              onChange={({target})=> onLoadAsync(target.value)} >
+              <option value="1">Este Mes</option>
+              <option value="6">Este Semestre</option>
+              <option value="12">Este Año</option>
             </select>
           </div>
         </div>

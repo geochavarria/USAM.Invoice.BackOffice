@@ -1134,7 +1134,8 @@ Chat Widget
 }
 
 .card {
-  height: 770px;
+  height: calc(100vh - 200px);
+
   background: #ffffff;
   border: 1px solid #ecedf2;
   -webkit-box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);

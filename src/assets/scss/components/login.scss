@@ -332,13 +332,14 @@ Login Section
   font-size: 15px;
   line-height: 20px;
   color: #696969;
-  background: #ffffff;
+  //background: #ffffff;
   margin: 10px 0 25px;
 }
 
 .login-form .bottom-box .divider span {
   position: relative;
   z-index: 9;
+  text-align: center;
 }
 
 .login-form .bottom-box .divider:before {
@@ -357,9 +358,9 @@ Login Section
   left: 50%;
   top: 0px;
   height: 20px;
-  width: 60px;
-  background: #fff;
-  margin-left: -30px;
+  width: 75px;
+  background: #1A2147;
+  margin-left: -35px;
   content: "";
 }
 

@@ -1,8 +1,17 @@
 import React from "react";
 
 
-const BrandsDataTable = ({ data }) => {
+const BrandsDataTable = ({ 
+    data ,
+    onRowClick = () => {}
+}) => {
     
+
+    const btnEdit_onClick = (e) => {
+        onRowClick(e)
+    }
+
+
     return(<React.Fragment>
         <table className="default-table manage-job-table table-hover">
             <thead>
@@ -11,6 +20,7 @@ const BrandsDataTable = ({ data }) => {
                     <th>Código</th>
                     <th>Nombre</th>
                     <th>Correo</th>
+                    <th style={{width: "2rem"}}></th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +30,16 @@ const BrandsDataTable = ({ data }) => {
                         <td> <a href="#" style={{ textTransform: "none"}}>{ _item.abreviado } </a> </td>
                         <td> { _item.nombre }</td>
                         <td> { _item.correo } </td>
+                        <td>
+                            <button className="btn btn-light btn-sm" 
+                                onClick={e=> btnEdit_onClick({
+                                originalEvent: e,
+                                data: _item,
+                                index
+                            })}>
+                                <span className="fa fa-pencil-alt text-primary"></span>
+                            </button>
+                        </td>
                     </tr>
                 ))}
             </tbody>

@@ -8,9 +8,9 @@ const colors = ["#00008B", "#00BFFF", "#FFD700", "#32CD32", "#800000", "#FF4500"
 const DocumentResume = () => {
 
     const [dataSource, setDataSource ] = useState([])
-    const onLoadAsync = async () => {
-        const response =  await getDashboardDocumentResumeByTypeAsync();
-
+    const onLoadAsync = async (monthTerm = 1 ) => {
+        setDataSource([])
+        const response =  await getDashboardDocumentResumeByTypeAsync(monthTerm);
         const  { data } =  response;
         setDataSource(data || [])
     }
@@ -19,18 +19,28 @@ const DocumentResume = () => {
         onLoadAsync();
     }, [])
     return(<React.Fragment>
-        <div className="widget-title px-0 pb-1 ">
+        <div className="widget-title ps-0 pb-1 ">
             <div className="d-flex flex-column">
                 <h4 className="px-3 lh-1">Documentos 
                     <br></br><span className="fs-7 text-muted">Transmisiones por tipo</span>
                 </h4>
             </div>
+            <div className="chosen-outer" style={{minWidth: 160}}>
+                {/* <!--Tabs Box--> */}
+                <select className="chosen-single form-select" 
+                onChange={({target})=> onLoadAsync(target.value)} >
+                <option value="1">Este Mes</option>
+                <option value="6">Este Semestre</option>
+                <option value="12">Este Año</option>
+                </select>
+            </div>
         </div>
         <div className="widget-content pt-2">
-            <div className="d-flex flex-column align-items-end">
-                {dataSource.length === 0 && <div className="alert alert-primary py-0" role="alert">
+            {dataSource.length === 0 && <div className="alert alert-primary py-0" role="alert">
                 ** Nada que mostrar **
-                </div>}
+            </div>}
+            <div className="d-flex flex-column align-items-end">
+               
                 {dataSource.map((_item, index)=> (
                 <div className="w-100" key={index}>
                     <div className="d-flex align-items-center">

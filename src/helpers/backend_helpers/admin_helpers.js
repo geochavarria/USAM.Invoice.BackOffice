@@ -31,6 +31,8 @@ export const getDistritoByMunicipioIDAsync = (deptoID, munID)  => api.get(`${url
 export const getAllEmpresaAsync = (ID = 0) => api.get(`${url.GET_ALL_EMPRESA}`);
 export const getEmpresaByCodeAsync = (ID = 0) => api.get(`${url.GET_EMPRESA_PERFIL_BY_CODE}/${ID}`);
 export const getSucursalByEmpIDAsync = (ID = 0) => api.get(`${url.GET_SUCURSAL_BY_EMPRESA_CODE}/${ID}`);
+export const putSucursalByEmpIDUpsertAsync = ({ empresaID = 0, data  } ) => api.put(`${url.PUT_SUCURSAL_BY_EMPRESA_UPSERT}/${empresaID}`, data);
+
 //Api Managers
 export const postAPIKeyUpsertAsync = ({ code, data}) => api.create(`${url.POST_API_KEY_UPSERT}/${code}`,data );
 export const getAllAPIKeysAsync = () => api.get(`${url.GET_ALL_API_KEYS}/`);
