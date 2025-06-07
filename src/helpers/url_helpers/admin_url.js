@@ -1,5 +1,8 @@
 export const GET_ALL_EMPRESA= "/Administracion/Empresa/GetAll"
 export const GET_EMPRESA_PERFIL_BY_CODE = "/Administracion/Empresa/GetByID";
+export const PUT_EMPRESA_UPSERT = "/Administracion/Empresa";
+
+export const GET_EMPRESA_PUNTOS_VENTA_BY_CODE = "/Administracion/Empresa/PuntoVenta/GetByEmp";
 export const GET_SUCURSAL_BY_EMPRESA_CODE = "/Administracion/Sucursal/GetByEmp";
 export const PUT_SUCURSAL_BY_EMPRESA_UPSERT = "/Administracion/Sucursal/Empresa";
 

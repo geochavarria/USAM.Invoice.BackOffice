@@ -26,7 +26,7 @@ const ButtonSave = ({
                 disabled={ disabled || loading }
                 id={ elementId }
                 color="primary" 
-                className="btn-label btn-load waves-effect waves-light btn-default-size"
+                className="btn-label btn-load waves-effect waves-light d-flex"
                 onClick={ onClickEvent } >
                     <div className="label-icon">
                         { loading  ? <Spinner size="sm" className="flex-shrink-0"> Loading... </Spinner>

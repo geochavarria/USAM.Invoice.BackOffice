@@ -1,16 +1,24 @@
 import CustomCatchError from "@/components/common/CustomCatchError";
 import { SelectActividadEconomica, SelectDepartamento, SelectDistrito, SelectDomicilioFiscal, SelectMunicipio, SelectPais } from "@/components/controls/Catalogos";
-import { getEmpresaByCodeAsync } from "@/helpers/backend_helpers/admin_helpers";
+import { putEmpresaUpsertAsync } from "@/helpers/backend_helpers/admin_helpers";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import { useEffect, useState } from "react";
+import { Button, Form, FormFeedback, Input, Spinner } from "reactstrap";
+import { toast } from "react-toastify";
+import { MessageTitle } from "@/common/constants";
 
-const FormProfile = ({ data }) => {
+const FormProfile = ({ 
+    data, 
+    onConfirm = () => {}
+}) => {
 
    //Data State
    const [ profileData, setProfileData] =  useState({})
 
    //Trigger State
-   const [ catchError, setCatchError ]=  useState("")
+   const [ isSaving, setIsSaving ] =  useState(false);
+   const [ catchError, setCatchError ]=  useState("");
 
 
 
@@ -32,17 +40,19 @@ const FormProfile = ({ data }) => {
             coddfi : (profileData && profileData.coddfi) || 0,
             codmun_dis : (profileData && profileData.codmun_dis) || "00",
         },
+        validationSchema: Yup.object({
+            nombre_comercial: Yup.string().required("Requerido nombre comercial").max(250, "[150] Máximo"),
+            nombre: Yup.string().required("Requerido nombre").max(250, "[250] Máximo"),
+        }),
         onSubmit:async(values) => {
             setIsSaving(true)
             try{
-
-                return;
-                let response = await postParametroUpsertAsync({
+                let response = await putEmpresaUpsertAsync({
                     code : values.codigo,
                     data: values
                 });
 
-                toast.info(isEdit ? MessageTitle.MSG_INFO_ACTUALIZAR : MessageTitle.MSG_INFO_REGISTRO,{ 
+                toast.info(MessageTitle.MSG_INFO_ACTUALIZAR,{ 
                     position: 'top-right', 
                     hideProgressBar: false, 
                     closeOnClick: false
@@ -53,9 +63,7 @@ const FormProfile = ({ data }) => {
                     data : response.data,
                     index : -1
                 })
-
-
-                modalToggle_onClick()
+                
             }catch(ex){
                 setCatchError(ex)
             }finally{
@@ -70,11 +78,16 @@ const FormProfile = ({ data }) => {
     },[data])
 
     return (
-        <form className="default-form">
+        <Form className="default-form" 
+            onSubmit={(e)=> {
+                e.preventDefault();
+                validationData.handleSubmit(null);
+                return false
+            }}>
             <CustomCatchError life="5000" innerException={catchError}/>
             <div className="row">
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group xl-6 col-lg-12 col-md-12">
                     <label>Empresa (Requerido)</label>
                     <input
                         type="text"
@@ -87,21 +100,27 @@ const FormProfile = ({ data }) => {
                     />
                 </div>
 
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group xl-6 col-lg-12 col-md-12">
                     <label>Nombre Comercial (Opcional)</label>
-                    <input
+                    <Input
                         type="text"
+                        validate={{ required: { value:true } }}
                         name="nombre_comercial"
                         placeholder="Nombre o  Razón Social"
                         onBlur={validationData.handleBlur}
                         onChange={validationData.handleChange}
                         value = { validationData.values.nombre_comercial || ""}
-                        required
+                        invalid={
+                                validationData.touched.nombre_comercial && validationData.errors.nombre_comercial ? true : false
+                        }
                     />
+                    {validationData.touched.nombre_comercial && validationData.errors.nombre_comercial ? (
+                        <FormFeedback type="invalid">{validationData.errors.nombre_comercial}</FormFeedback>
+                    ) : null}
                 </div>
 
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-3 col-md-4">
+                <div className="form-group xl-3 col-lg-6 col-md-4">
                     <label>Número Tributario (NIT)</label>
                     <input
                         type="text"
@@ -115,7 +134,7 @@ const FormProfile = ({ data }) => {
                 </div>
                 
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-3 col-md-4">
+                <div className="form-group xl-3 col-lg-6 col-md-4">
                     <label>Registro de IVA (NRC)</label>
                     <input
                         type="text"
@@ -129,7 +148,7 @@ const FormProfile = ({ data }) => {
                 </div>
 
                 {/* <!-- Search Select --> */}
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group  xl-3 col-lg-6 col-md-12">
                     <label>País </label>
                     <SelectPais
                         onOptionSelect ={({data}) => validationData.setFieldValue("codpai", data.value)}
@@ -138,7 +157,7 @@ const FormProfile = ({ data }) => {
                 </div>
 
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-4 col-md-6">
+                <div className="form-group  xl-3 col-lg-6 col-md-6">
                     <label>Departamento</label>
                     <SelectDepartamento
                         isSearch = { true }
@@ -177,7 +196,7 @@ const FormProfile = ({ data }) => {
                     />
                 </div>
 
-                <div className="form-group col-lg-8 col-md-12">
+                <div className="form-group xl-8 col-lg-12 col-md-12">
                     <label>Actividad Económica</label>
                     <SelectActividadEconomica
                         onError={e => setCatchError(e)}
@@ -190,10 +209,16 @@ const FormProfile = ({ data }) => {
 
                 {/* <!-- Input --> */}
                 <div className="form-group col-12 text-end">
-                    <button className="theme-btn btn-style-one">Actualizar</button>
+                    <Button
+                        disabled={isSaving}
+                        type="submit"
+                        className="theme-btn btn-style-one">
+                        {isSaving && <Spinner size={"sm"} className="me-2" />}
+                        Actualizar
+                    </Button>
                 </div>
             </div>
-        </form>
+        </Form>
     );
 };
 

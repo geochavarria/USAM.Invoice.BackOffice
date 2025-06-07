@@ -30,7 +30,10 @@ export const getDistritoByMunicipioIDAsync = (deptoID, munID)  => api.get(`${url
 //Empresa
 export const getAllEmpresaAsync = (ID = 0) => api.get(`${url.GET_ALL_EMPRESA}`);
 export const getEmpresaByCodeAsync = (ID = 0) => api.get(`${url.GET_EMPRESA_PERFIL_BY_CODE}/${ID}`);
+export const putEmpresaUpsertAsync = ({ code = 0, data  } ) => api.put(`${url.PUT_EMPRESA_UPSERT}/${code}`, data);
+
 export const getSucursalByEmpIDAsync = (ID = 0) => api.get(`${url.GET_SUCURSAL_BY_EMPRESA_CODE}/${ID}`);
+export const getEmpresaPuntosVentaByCodeAsync = (ID = 0) => api.get(`${url.GET_EMPRESA_PUNTOS_VENTA_BY_CODE}/${ID}`);
 export const putSucursalByEmpIDUpsertAsync = ({ empresaID = 0, data  } ) => api.put(`${url.PUT_SUCURSAL_BY_EMPRESA_UPSERT}/${empresaID}`, data);
 
 //Api Managers

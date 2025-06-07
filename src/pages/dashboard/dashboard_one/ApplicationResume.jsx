@@ -74,7 +74,7 @@ const ApplicationResume = () => {
                             <span className="fw-semibold text-end "> {_item.counter}</span>
                             <span className="d-flex items-center justify-content-end gap-1"> 
                                 <i className="fa fa-arrow-up text-success" />
-                                 {_item.value.toFixed(1)}%</span>
+                                 {_item.value.toFixed(2)}%</span>
                         </div>
                     </div>
                 ))}

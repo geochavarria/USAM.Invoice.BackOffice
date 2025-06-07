@@ -49,8 +49,6 @@ class APIClient {
             // Cause this function to trigger
             let message;
             let text = undefined
-
-            console.log(responseError)
             switch (error.status) {
                 case 500:
                     text = undefined

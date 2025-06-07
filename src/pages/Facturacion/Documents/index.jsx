@@ -11,6 +11,8 @@ import { APP_DIRECTORY_PATH } from "@/config";
 import PDFViewerModal from "@/components/common/PDFViewerModal";
 import ContentWaitLoading from "@/components/common/ContentWaitLoading";
 import InvoiceForm from "./InvoiceModal";
+import { toast } from "react-toastify";
+import SendEmailModal from "./SendEmailModal";
 
 const metadata = {
   title: "Documentos Transmitidos",
@@ -31,6 +33,7 @@ const Documentos = () => {
 
   //Modal State
   const [ showVerifyModal, setShowVerifyModal ] =  useState(false)
+  const [ showSendEmailModal, setShowSendEmailModal ] =  useState(false)
 
   //Trigger State
   const [ catchError, setCatchError ] =  useState("")
@@ -50,28 +53,41 @@ const Documentos = () => {
     }else if(action === OperacionUsuario.IMPRIMIR){
         btnImprimir_onClick(e)
     }
+    else if(action === OperacionUsuario.PROCESAR){
+       setShowSendEmailModal(true)
+    }
 }
 
 
-const btnImprimir_onClick = async(e) => {
-  setIsLoading(true)
-  try {
-      const { data } =  e
-      const path  = `${APP_DIRECTORY_PATH}\\\\${data.fecEmi.replaceAll("-","\\\\")}\\\\${data.codigo}.pdf`
-      const response =  await getFileByDirectoryPathAsync(path)
+  const btnAnular_onClick = (e) => {
 
-      setPrintOptions({
-          url: URL.createObjectURL(response),
-          type: "pdf"
-      })
-      setShowPrintModal(true)
-
-  } catch (error) {
-      setCatchError(error)
-  }finally{
-      setIsLoading(false)
+    toast.error("Opción no habilitado.", {
+      position: "top-right",
+      hideProgressBar: false, 
+      closeOnClick: false
+    })
   }
-} 
+
+  const btnImprimir_onClick = async(e) => {
+    setIsLoading(true)
+    try {
+        const { data } =  e
+        const path  = `${APP_DIRECTORY_PATH}\\\\${data.fecEmi.replaceAll("-","\\\\")}\\\\${data.codigo}.pdf`
+        const response =  await getFileByDirectoryPathAsync(path)
+
+        setPrintOptions({
+            url: URL.createObjectURL(response),
+            type: "pdf"
+        })
+        setShowPrintModal(true)
+
+    } catch (error) {
+        setCatchError(error)
+    }finally{
+        setIsLoading(false)
+    }
+  } 
+
 
   return (
     <>
@@ -105,6 +121,12 @@ const btnImprimir_onClick = async(e) => {
             show={ showFacturaModal }
             data={ selectedData }
             onHide={e => setShowFacturaModal(false)} />}
+
+
+        {showSendEmailModal && <SendEmailModal 
+            show={ showSendEmailModal }
+            data={ selectedData }
+            onHide={e => setShowSendEmailModal(false)} />}
 
         {showVerifyModal &&  
           <ConsultaPublicaModal

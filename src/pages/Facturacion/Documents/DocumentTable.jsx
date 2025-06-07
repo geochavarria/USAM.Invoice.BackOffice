@@ -310,7 +310,16 @@ const DocumentTable = ({
                                             <i className="fa fa-bars text-muted"></i>
                                         </DropdownToggle>
                                         <DropdownMenu className="dropdown-menu-end" container={"simpleBarContent"}>
-                                            
+                                            <DropdownItem to="#"  
+                                                onClick={e => onRowClick({
+                                                    originalEvent : e,
+                                                    action : OperacionUsuario.PROCESAR,
+                                                    data : _item,
+                                                    index : index
+                                                })}>
+                                                    <i className="fa fa-envelope   text-primary"></i> Notificar
+                                            </DropdownItem>
+
                                             <DropdownItem to="#"  
                                                 onClick={e => onRowClick({
                                                     originalEvent : e,
@@ -318,7 +327,7 @@ const DocumentTable = ({
                                                     data : _item,
                                                     index : index
                                                 })}>
-                                                    <i className="fa fa-cloud-download-alt   text-muted"></i> Consultar
+                                                    <i className="fa fa-cloud-download-alt   text-primary"></i> Consultar
                                             </DropdownItem>
                                             <DropdownItem to="#"
                                                 onClick={e => onRowClick({
@@ -327,7 +336,7 @@ const DocumentTable = ({
                                                     data : _item,
                                                     index : index
                                                 })}>
-                                                    <i className="fa fa-print  text-muted"></i> Imprimir
+                                                    <i className="fa fa-print  text-secondary"></i> Imprimir
                                             </DropdownItem>
                                         </DropdownMenu>
                                     </UncontrolledDropdown>

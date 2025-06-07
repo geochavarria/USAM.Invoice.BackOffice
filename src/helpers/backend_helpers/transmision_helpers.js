@@ -5,3 +5,4 @@ import * as url from "../url_helpers/transmision_url";
 const api = new APIClient(API_URL, APP_ID, APP_KEY);
 
 export const getVerifyDocumentByCodeAsync = (code) => api.get(`${url.VERIFY_DOCUMENT_BY_CODE}/${code}`);
+export const postSendMailDocumentByIDAsync = (request) => api.create(`${url.NOTIFY_DOCUMENT_BY_CODE}`,request );
