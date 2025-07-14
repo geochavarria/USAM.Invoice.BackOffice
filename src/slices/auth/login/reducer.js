@@ -31,14 +31,11 @@ const loginSlice = createSlice({
   
       setLoginSuccess(state, action) {
         const { payload } = action;
-        const { data } =  payload;
+        
+        console.log(payload)
         return {...state,
-          user : {
-            usuario: data.usuario,
-            nombre: data.nombre,
-            codigo: data.codigo
-          },
-          token : data.token,
+          user : payload.user,
+          token : payload.token,
           loading : false,
           errorMsg : false,
           isLockScreen : false

@@ -249,12 +249,12 @@ const BrandForm = ({
             <div className="d-flex  w-100 justify-content-between align-items-end ">
                 <span className="text-muted fs-10">Ref. { validationData.values.codigo } </span>
                 <div className="hstack gap-2">
-                <button
-                        className="theme-btn btn-style-one w-100"
-                        type="button"
-                        name="submit-form"
-                        onClick={(evt)=> validationData.handleSubmit(evt) } 
-                    >
+                    <button
+                            className="theme-btn btn-style-one w-100"
+                            type="button"
+                            name="submit-form"
+                            onClick={(evt)=> validationData.handleSubmit(evt) } 
+                        >
                         Guardar
                     </button>
                 </div>

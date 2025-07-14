@@ -9,6 +9,8 @@ const AuthProtected = (props) => {
     const dispatch = useDispatch();
     const { userProfile, loading, token , isLockScreen } = useProfile();
     
+
+    
     useEffect(() => {
       if (userProfile && !loading && token) {
         setAuthorization(token);
@@ -20,7 +22,7 @@ const AuthProtected = (props) => {
     /*
       redirect is un-auth access protected routes via url
     */
-    if (!userProfile.usr_codigo && !loading && !token) {
+    if (!userProfile.codigo && !loading && !token) {
       return (
         <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
       );

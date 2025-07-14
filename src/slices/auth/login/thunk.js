@@ -27,10 +27,8 @@ export const loginUser = (user, history) => async(dispatch) => {
   
       // :::::: Commit  USER :::::: //
       dispatch(setLoginSuccess({
-        data: {
-          usuario,
+          user: usuario,
           token
-        }
       }));
        // :::::: Update  Current Company :::::: //
        //dispatch(onUpdateCurrentCompany(user.regional))
@@ -41,7 +39,7 @@ export const loginUser = (user, history) => async(dispatch) => {
     //     data : companyList 
     //   }))
   
-     window.location.href = BASE_PATH +  "/dashboard"
+    // window.location.href = BASE_PATH +  "/dashboard"
     } catch (error) {
       dispatch(apiError(error));
     }
